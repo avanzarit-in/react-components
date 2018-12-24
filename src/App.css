@@ -1,0 +1,32 @@
+#root {
+  height:100%;
+}
+
+.ui.sidebar {
+    overflow: visible !important;
+}
+
+.ui.accordion .item .title .dropdown.icon{
+  float:right;
+}
+
+.ui.accordion .content {
+  margin-left:15%;
+  font-size:.85rem;
+  color:gray;
+
+}
+
+.ui.menu {
+  border-radius: 0px;
+}
+
+.accordion-menu{
+  font-weight:bold;
+
+}
+.accordion-menu .accordion-menu-item{
+  font-weight:300;
+  padding-top:10px;
+  padding-left:25px;
+}
