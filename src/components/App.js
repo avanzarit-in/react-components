@@ -33,11 +33,6 @@ this.setState({activeItem:name})
             active={activeItem === 'ps'}
              onClick={()=>this.handleItemClick('ps')}
           />
-          <Menu.Item
-            name='Reports'
-            active={activeItem === 'report'}
-             onClick={()=>this.handleItemClick('report')}
-          />
 
 
           <Menu.Menu position="right">

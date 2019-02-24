@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Transition, Image, Menu, Sidebar, Segment, Dropdown, Icon, Popup, Breadcrumb, Accordion, Grid } from 'semantic-ui-react'
-import logo from './anmol.png'
+import logo from './anmol.png';
+import DataGrid from './../data-grid/DataGrid'
 const trigger = (userName) => (
     <span>
         <Icon name='user' /> Hello, {userName}
@@ -17,24 +18,15 @@ export default class Dashboard1 extends Component {
 
     handleItemClick = name => this.setState({ activeItem: name })
 
-    onDropdownClick = () => {
-        this.setState({ visible: !this.state.visible })
-    }
+ 
 
     toggle = () => {
         console.log(this.state.toggleState);
         this.setState({ toggleState: !this.state.toggleState })
     }
-    handleClick = (e, titleProps) => {
-        const { index } = titleProps
-        const { activeIndex } = this.state
-        const newIndex = activeIndex === index ? -1 : index
-
-        this.setState({ activeIndex: newIndex })
-    }
-
+ 
     render() {
-
+console.log("Re-render called")
         const { activeItem } = this.state || {}
         const { activeIndex } = this.state || -1
         const { visible } = this.state || false;
@@ -47,10 +39,10 @@ export default class Dashboard1 extends Component {
 
                             <Menu.Item >
                                 <Grid columns={2}>
-                                    <Grid.Column style={{ textAlign: 'center' }}>
+                                {/*    <Grid.Column style={{ textAlign: 'center' }}>
                                         <Image src={logo} size='small' />
                                     </Grid.Column>
-
+*/}
                                     <Grid.Column style={{ textAlign: 'center' }}>
                                         {!this.state.toggleState ?
                                             <Icon name="sidebar" style={{ marginTop: '10px', cursor: 'pointer' }} onClick={this.toggle} />
@@ -91,49 +83,7 @@ export default class Dashboard1 extends Component {
                                 </Menu.Menu>
                             </Menu.Item>
 
-                            <Menu.Item>
-                                <Menu.Header>Administration</Menu.Header>
-
-                                <Menu.Menu>
-                                    <Menu.Item
-                                        name='shared'
-                                        active={activeItem === 'shared'}
-                                        onClick={this.handleItemClick}
-                                        content={
-                                            <div className="accordion-menu" name="Customer Management">
-                                                <Icon name="caret right" onClick={this.onDropdownClick} />Customer Management
-                                        <div >
-                                                    <Transition visible={visible}>
-                                                        <div>
-                                                            <div className="accordion-menu-item"> Create Customer </div>
-                                                            <div className="accordion-menu-item"> Delete Customer </div>
-                                                        </div>
-                                                    </Transition>
-                                                </div>
-                                            </div>
-                                        }
-                                    />
-
-
-                                    <Menu.Item
-                                        name='dedicated'
-                                        active={activeItem === 'dedicated'}
-                                        onClick={this.handleItemClick}
-                                    />
-                                </Menu.Menu>
-                            </Menu.Item>
-
-                            <Menu.Item>
-                                <Menu.Header>Support</Menu.Header>
-                                <Menu.Menu>
-                                    <Menu.Item name='email' active={activeItem === 'email'} onClick={this.handleItemClick}>
-                                        E-mail Support
-                                    </Menu.Item>
-                                    <Menu.Item name='faq' active={activeItem === 'faq'} onClick={this.handleItemClick}>
-                                        FAQs
-                                    </Menu.Item>
-                                </Menu.Menu>
-                            </Menu.Item>
+                                     
 
                         </Menu>
                     </Grid.Column> : null}
@@ -149,23 +99,7 @@ export default class Dashboard1 extends Component {
                             <Breadcrumb.Section>Home</Breadcrumb.Section>
                         </Menu.Item>
 
-                         <Menu.Item >
-                              <Dropdown trigger={trigger(this.props.username)} options={
-                                    [
-                                        {
-                                            key: 'user',
-                                            text: (
-                                                <span>
-                                                    Signed in as <strong>{this.props.username}</strong>
-                                                </span>
-                                            ),
-                                            disabled: true,
-                                        },
-                                        { key: 'profile', text: 'Your Profile' },
-                                        (<Dropdown.Item key='sign-out' onClick={this.signOut}>Sign Out</Dropdown.Item>),
-                                    ]
-                                } />
-                        </Menu.Item>
+                        
 
                         <Menu.Menu position="right">
                             <Menu.Item>
@@ -186,8 +120,15 @@ export default class Dashboard1 extends Component {
                                 } />
                             </Menu.Item>
                         </Menu.Menu>
-                    </Menu></Grid.Column>
+                    </Menu>
+                  <Grid>
+                      <Grid.Column>
+                           <DataGrid/>
+                          </Grid.Column>
+                      </Grid>
+                    </Grid.Column>
             </Grid>
+            
         );
     }
 }
